@@ -46,7 +46,7 @@ do
 		;;
 	esac
 done
-echo "Dooublet Combination Percentage"
+echo "Doublet Combination Percentage"
 for key in ${!resultDoublet[@]}
 do
 resultDoublet[$key]=$(((${resultDoublet[$key]}*100)/$numOfFlips))
@@ -88,9 +88,65 @@ do
 esac
 done
 
-echo ""
+echo "Triplet combinaion percentage"
 for key in ${!resultTriplet[@]}
 do
 resultTrplet[$key]=$(((${resultTriplet[$key]}*100)/$numOfFlips))
 echo "$key : ${resultTriplet[$key]}"
 done
+
+
+arSinglet=($( for value in ${resultSinglet[@]}
+do
+	echo "$value"
+done | sort
+ ))
+
+echo "Sorted Singlet Values"
+echo ${arSinglet[@]}
+singleMax=${arSinglet[1]}
+for key in ${!resultSinglet[@]}
+do
+	if [ ${resultSinglet[$key]} -eq $singletMax ]
+	then
+		echo "winning combination of Singlet is : $key"
+	break
+	fi
+done
+
+arDoublet=($( for value in ${resultDoublet[@]} 
+do
+	echo "$value"
+done | sort
+))
+
+echo "sorted Doublet values"
+echo ${arDoublet[@]}
+doubleMax=${arDoublet[3]}
+for key in ${!resultDoublet[@]}
+do
+	if [ ${resultDoublet[$key]} -eq $doubleMax ]
+	then
+		echo "winning combination of Doublet is : $key"
+	break
+	fi
+done
+
+arTriplet=($( for value in ${resultTriplet[@]} 
+do
+	echo "$value"
+
+done | sort ))
+
+echo "Sorted triplet values"
+echo ${arTriplet[@]}
+tripletMax=${arTriplet[7]}
+for key in ${!resultTriplet[@]}
+do
+	if [ ${resultTriplet[$key]} -eq $tripletMax ]
+	then
+	echo "winning combination of triplet is : $key"
+	break
+	fi
+done
+
