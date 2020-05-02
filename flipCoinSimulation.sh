@@ -19,6 +19,7 @@ flip=$((RANDOM%2))
 done
 resultSinglet["Heads"]=$((($headsCount*100)/$numOfFlips))
 resultSinglet["Tails"]=$((($tailsCount*100)/$numOfFlips))
+echo "Singlet Combination Percentage"
 echo ${!resultSinglet[@]}
 echo ${resultSinglet[@]}
 
@@ -45,8 +46,51 @@ do
 		;;
 	esac
 done
+echo "Dooublet Combination Percentage"
 for key in ${!resultDoublet[@]}
 do
 resultDoublet[$key]=$(((${resultDoublet[$key]}*100)/$numOfFlips))
 printf "$key : ${resultDoublet[$key]}"
+done
+declare -A resultTriplet
+resultTriplet+=( ["HHH"]=0 ["THH"]=0 ["HTH"]=0 ["HHT"]=0 ["TTH"]=0 ["THT"]=0 ["HTT"]=0 ["TTT"]=0 )
+for (( i=1; i<=10; i++ ))
+do
+	flip=$((RANDOM%8))
+	case $flip in
+	0)
+		((resultTriplet["HHH"]++))
+		;;
+	1)
+		((resultTriplet["THH"]++))
+		;;
+
+	2)
+		((resultTriplet["HTH"]++))
+		;;
+	3)
+		((resultTriplet["HHT"]++))
+		;;
+	4)
+		((resultTriplet["TTH"]++))
+		;;
+	5)
+		((resultTrplet["THT"]++))
+		;;
+	6)
+		((resultTriplet["HTT"]++))
+		;;
+	7)
+		((resultTriplet["TTT"]++))
+		;;
+	*)
+		;;
+esac
+done
+
+echo ""
+for key in ${!resultTriplet[@]}
+do
+resultTrplet[$key]=$(((${resultTriplet[$key]}*100)/$numOfFlips))
+echo "$key : ${resultTriplet[$key]}"
 done
